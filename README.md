@@ -8,7 +8,7 @@ Web 330-331H Enterprise javaScript II
 
 Week 1
 ------
-* Classes and Interfaces
+* **Classes and Interfaces**
   * Pages: 17-18
   * Pages: 22-25
   * Pages: 82-87

@@ -51,5 +51,6 @@ CellPhone.prototype.getDetails = function () {
 
 var myPhone = new CellPhone('Apple', 'iPhone X S Max', 'Rose Gold', 1099.00);
 
+// Output
 console.log(myPhone.getDetails());
 // end program

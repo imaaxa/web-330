@@ -24,12 +24,14 @@ console.log(header.display('Cory', 'Gilliam', 'Exercise 1.3'));
 */
 
 // Start program
+// Create a Person object to use as an object model
 var Person = {
   getAge: function() {
     console.log('The person\'s age is ' + this.age);
   }
 };
 
+// Create an object using the Person object
 var bob = Object.create(Person, {
   'age': {
     'value': 28,

@@ -6,7 +6,7 @@ Web 330-331H Enterprise javaScript II
 * Professor Mohamed Eltayeb - Bellevue University
 * Cory Gilliam - Bellevue University
 
-Week 1
+[Week 1](https://github.com/imaaxa/web-330/tree/master/week-1)
 ------
 * **Classes and Interfaces**
   * Pages: 17-18

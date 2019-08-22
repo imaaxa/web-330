@@ -46,9 +46,9 @@ var DatabaseSingleton = (function () {
 
 // Variables
 function databaseSingletonTest() {
-  var databaseInstance1 = DatabaseSingleton.getInstance();
-  var databaseInstance2 = DatabaseSingleton.getInstance();
-  console.log("Same database instance? " + (databaseInstance1 === databaseInstance2));
+  var mySQL = DatabaseSingleton.getInstance();
+  var Oracle = DatabaseSingleton.getInstance();
+  console.log("Same database instance? " + (mySQL === Oracle));
 }
 databaseSingletonTest();
 

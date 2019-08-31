@@ -31,9 +31,9 @@ Web 330-331H Enterprise javaScript II
 ------
 * **Ajax**
   * [jQuery.com] (https://jquery.com/)
-    *jQuery.ajax()
-    *jQuery.post()
-    *jQuery.get()
-    *.serializeArray()
-    *.serialize()
-    *jQuery AJAX example
+    * jQuery.ajax()
+    * jQuery.post()
+    * jQuery.get()
+    * .serializeArray()
+    * .serialize()
+    * jQuery AJAX example

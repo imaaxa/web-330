@@ -1,0 +1,39 @@
+<!--
+============================================
+; Title: exercise-4.2.js
+; Author: Cory Gilliam
+; Date: 28 Aug 2019
+; Modified By:
+; Description: HTTP GET and POST Operations
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP GET and POST Operations</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <button id="ajax">Click Me!</button>
+    <script>
+        $(function() {
+            // Add click event listner to the button
+            $('#ajax').click(function (){
+                // Upon click, get random image url from dog.ceo
+                $.get('https://dog.ceo/api/breeds/image/random', function (data, status) {
+                    // Log url upon success
+                    if (data.status === 'success') {
+                        console.log(data.message);
+                    } else {
+                        console.log('Something went wrong.');
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>

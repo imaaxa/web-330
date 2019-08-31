@@ -1,0 +1,49 @@
+<!--
+============================================
+; Title: exercise-4.3.js
+; Author: Cory Gilliam
+; Date: 28 Aug 2019
+; Modified By:
+; Description: HTTP PUT and DELETE Operations
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>HTTP PUT and DELETE Operations</title>
+
+    <!-- jQuery reference -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+
+</head>
+<body>
+    <button id="delete">Click to Delete!</button>
+    <script>
+        $(function() {
+            // Add click event listner to the button
+            $('#delete').click(function (){
+                // Upon click, get random image url from dog.ceo
+                $.ajax({
+                    url: 'http://httpbin.org/delete',
+                    dataType: 'json',
+                    type: 'DELETE',
+                    data: {
+                        id: 123456,
+                        username: 'myLuggage',
+                        password: '12345'
+                    },
+                    success: function (data, status) {
+                        // Log url upon success
+                        if (status === 'success') {
+                            console.log(data);
+                        } else {
+                            console.log('Something went wrong.');
+                        }
+                    }
+                })
+            });
+        });
+    </script>
+</body>
+</html>

@@ -1,0 +1,63 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Exercise 5.2 - the Proxy Pattern</title>
+
+    <!-- jquery Reference Library -->
+    <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
+
+    <!-- Bootstrap Library -->
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  </head>
+  <body>
+    <nav class="navbar navbar-dark bg-dark">
+      <a href="#" class="navbar-brand">Home</a>
+    </nav>
+
+    <div class="container">
+      <div class="row">
+        <div class="col-md-12">
+          <h2>Exercise 5.2 - the Proxy Pattern</h2>
+          <p><button class="btn btn-primary" id="btnPreviewProxy">Preview Proxy</button></p>
+          <p><span class="spanProxyResults"></span></p>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      $(function() {
+        var funQuotes = {
+          // Set up array of objects
+          quotes: [
+            { quote:'It\'s not my fault.', character: 'Han Solo' },
+            { quote:'Your focus determines your reality.', character: 'Qui-Gon Jinn' },
+            { quote:'Do. Or do not. There is no try', character: 'Yoda' },
+            { quote:'Somebody has to save our skins.', character: 'Leia Organa' },
+            { quote:'In my experience there is no such thing as luck.', character: 'Obi-Wan Kenobi' },
+            { quote:'I find your lack of faith disturbing.', character: 'Darth Vader' }
+          ],
+
+          display: function (){
+            // Query for item once
+            var item = $('.spanProxyResults');
+
+            // Get random number between 0 and array length
+            var index = Math.round(Math.random() * (this.quotes.length - 1));
+
+            // Clear span, Append new message
+            item.html('');
+            item.append('<blockquote><p>' + this.quotes[index].quote + ' - ' + this.quotes[index].character + '</p></blockquote>');
+          }
+        }
+
+        // Add click event listner to button
+        $('#btnPreviewProxy').click($.proxy(funQuotes, 'display'));
+      });
+    </script>
+  </body>
+</html>

@@ -37,3 +37,19 @@ Web 330-331H Enterprise javaScript II
     * .serializeArray()
     * .serialize()
     * jQuery AJAX example
+
+[Week 5](https://github.com/imaaxa/web-330/tree/master/week-5)
+------
+* **Design Patterns in jQuery and Namespaces**
+  * Pages: 167-180
+  * Pages: 207-218
+
+[Week 6](https://github.com/imaaxa/web-330/tree/master/week-6)
+------
+* **Introduction to MVVM with Knockout.js**
+  * Pages: 125-139
+  * [KnockoutJS.com] (https://knockoutjs.com/documentation/introduction.html)
+    * Observables
+    * Observable arrays
+    * Computed observables
+    * Writable computed observables

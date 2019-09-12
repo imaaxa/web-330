@@ -9,7 +9,7 @@
 -->
 <!DOCTYPE html>
 <html lang="en">
-<head>
+  <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
@@ -20,14 +20,48 @@
           integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
 
     <!-- JavaScript Libraries -->
-    <script src="../knockout-<version>.js"></script>
-</head>
-<body>
+    <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
 
+    <main role="main" class="container">
+      <h2>Knockour ViewModel Example</h2>
+      <div>
+        <p class="p-3 mb-2 bg-success text-white rounded">Email
+          <span data-bind="text: fullName"></span> at <span data-bind="text: emailAddress"></span>
+        </p>
+      </div>
+      <div class="form-group">
+        <label for="firstName">First Name:
+          <input type="text" class="form-control alert-warning" data-bind="value: firstName" id="firstName" />
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="lastName">Last Name:
+          <input type="text" class="form-control alert-warning" data-bind="value: lastName" id="lastName"/>
+        </label>
+      </div>
+      <div class="form-group">
+        <label for="emailAddress">Email:
+          <input type="text" class="form-control alert-warning" data-bind="value: emailAddress" id="emailAddress"/>
+        </label>
+      </div>
+    </main>
 
-<script>
+    <script>
+      // Data model
+      var ViewModel = function(first, last, email) {
+        this.firstName = ko.observable(first);
+        this.lastName = ko.observable(last);
+        this.emailAddress = ko.observable(email);
 
-</script>
+        this.fullName = ko.pureComputed( function() {
+          return this.firstName() + ' ' + this.lastName();
+        }, this);
+      };
 
-</body>
+      ko.applyBindings( new ViewModel( 'Peter', 'Parker', 'friendlyneighborhood@advengers.com' ));
+    </script>
+
+  </body>
 </html>

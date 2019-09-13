@@ -1,0 +1,48 @@
+<!--
+============================================
+; Title: exercise-6.3
+; Author: Cory Gilliam
+; Date: 12 Sept 2019
+; Modified By:
+; Description: ViewModel Object Literals
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Exercise 6.3</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+    <h2>Object Literal Example</h2>
+
+    <div class="form-group">
+      <label for="txtFirstName">First Name:</label>
+      <input type="text" name="" id="txtFirstName" class="form-control alert-warning" data-bind="value:firstName">
+    </div>
+
+    <div class="form-group">
+      <label for="txtLastName">Last Name:</label>
+      <input type="text" name="" id="txtLastName" class="form-control alert-warning" data-bind="value:lastName">
+    </div>
+
+  <script>
+    var personViewModel = {
+      firstName: 'John',
+      lastName: 'Smith'
+    };
+
+    ko.applyBindings( personViewModel );
+  </script>
+
+  </body>
+</html>

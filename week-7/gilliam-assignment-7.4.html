@@ -1,0 +1,87 @@
+<!--
+============================================
+; Title: assignment-7.4.js
+; Author: Cory Gilliam
+; Date: 17 Sept 2019
+; Modified By:
+; Description: Other Bindings
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Assignment 7.4</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+
+    <main role="main" class="container">
+      <br /><br />
+
+      <h2>The "other" binding</h2>
+
+      <table class="table table-dark table-striped table-hover">
+        <thead>
+          <tr>
+            <th>Title</th>
+            <th>Desctiption</th>
+            <th>Link</th>
+          </tr>
+        </thead>
+
+        <tbody data-bind="foreach: tutorial">
+          <tr>
+            <td><span data-bind="text: title"></span></td>
+            <td><span data-bind="text: description"></span></td>
+            <td><a data-bind="attr: { href: url, target: '_blank', style: 'padding: .5em; border: 1px solid;' }">Link</a>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br />
+    </main>
+
+    <script>
+      function tutorialViewModel() {
+        this.tutorial = ko.observableArray([
+          {
+            url: 'https://knockoutjs.com/documentation/visible-binding.html',
+            title: 'The "visible" and "hidden" bindings',
+            description: 'The visible and hidden bindings cause the associated DOM element to become hidden or visible according to the value you pass to the binding.'
+          },
+          {
+            url: 'https://knockoutjs.com/documentation/foreach-binding.html',
+            title: 'The "foreach" binding',
+            description: 'The foreach binding duplicates a section of markup for each entry in an array, and binds each copy of that markup to the corresponding array item. This is especially useful for rendering lists or tables.'
+          },
+          {
+            url: 'https://knockoutjs.com/documentation/click-binding.html',
+            title: 'The "click" binding',
+            description: 'The click binding adds an event handler so that your chosen JavaScript function will be invoked when the associated DOM element is clicked. This is most commonly used with elements like button, input, and a, but actually works with any visible DOM element.'
+          },
+          {
+            url: 'https://knockoutjs.com/documentation/event-binding.html',
+            title: 'The "event" binding',
+            description: 'The event binding allows you to add an event handler for a specified event so that your chosen JavaScript function will be invoked when that event is triggered for the associated DOM element. This can be used to bind to any event, such as keypress, mouseover or mouseout.'
+          },
+          {
+            url: 'https://knockoutjs.com/documentation/html-binding.html',
+            title: 'The "html" binding',
+            description: 'The html binding causes the associated DOM element to display the HTML specified by your parameter.'
+          }
+        ]);
+      }
+      ko.applyBindings(new tutorialViewModel());
+    </script>
+
+  </body>
+</html>

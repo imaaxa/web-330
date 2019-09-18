@@ -1,0 +1,75 @@
+<!--
+============================================
+; Title: exercise-7.2.js
+; Author: Cory Gilliam
+; Date: 12 Sept 2019
+; Modified By:
+; Description: The "if" Binding
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    <title>Exercise 7.2: The "if" Binding</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+    integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript Libraries -->
+    <script src="../knockout-3.5.0.js"></script>
+  </head>
+  <body>
+
+    <main class="container" role="main">
+      <br><br>
+
+      <h2>Example 2: Recreated by: Cory Gilliam</h2>
+
+      <div class="form-group">
+        <label for="txtFirstName">First Name: </label>
+        <input type="text" class="form-control" id="txtFirstName" data-bind="value: firstname" />
+      </div>
+
+      <div data-bind="if: displayLastName">
+        <div class="form-group">
+          <label for="txtLastName">Last Name: </label>
+          <input type="text" class="form-control" id="txtLastName" data-bind="value: lastname" />
+        </div>
+      </div>
+
+      <br>
+
+      <div data-bind="if: displayFullName()">
+        <h2><span id="fullName" class="alert-success" data-bind="text: displayFullName()"></span></h2>
+        <br>
+      </div>
+
+    </main>
+
+    <script>
+      function BookViewModel() {
+        // Variables
+        this.firstname = ko.observable('');
+        this.lastname  = ko.observable('');
+
+        // Functions
+        this.displayLastName = ko.pureComputed(function () {
+          return this.firstname();
+        }, this);
+
+        this.displayFullName = ko.pureComputed(function () {
+          if (this.firstname() && this.lastname()) {
+            return this.firstname() + ' ' + this.lastname();
+          }
+          return false;
+        }, this);
+      }
+      ko.applyBindings(new BookViewModel());
+    </script>
+
+  </body>
+</html>

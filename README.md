@@ -53,3 +53,25 @@ Web 330-331H Enterprise javaScript II
     * Observable arrays
     * Computed observables
     * Writable computed observables
+
+[Week 7](https://github.com/imaaxa/web-330/tree/master/week-7)
+------
+* **MVVM Bindings with Knockout.js**
+  * [KnockoutJS.com] (https://knockoutjs.com/documentation/introduction.html)
+    * Bindings
+    * Controlling Flow
+    * Events
+    * Rendering templates
+
+[Week 8](https://github.com/imaaxa/web-330/tree/master/week-8)
+------
+* **Advanced MVVM with Knockout.js**
+  * [KnockoutJS.com] (https://knockoutjs.com/documentation/introduction.html)
+    * Loading and Saving JSON data
+    * Custom Bindings
+    * Advanced Observables
+
+[Week 9](https://github.com/imaaxa/web-330/tree/master/week-9)
+------
+* **MVC with Backbone.js**
+  * Pages: 111-125

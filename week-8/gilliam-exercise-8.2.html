@@ -24,10 +24,72 @@
   </head>
   <body>
 
+    <div role="main" class="container">
 
-  <script>
+      <h2>CR Example</h2>
+      <div class="row" data-bind="if: error">
+        <div class="col-sm-12">
+          <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong> <span data-bind="text: error()"></span>
+          </div>
+        </div>
+      </div>
 
-  </script>
+      <div class="row">
+        <div class="col-sm-6">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+
+              <h3 class="card-title">Grocery List</h3>
+              <div class="card-text">
+                <div class="form-group row">
+
+                  <label for="txtFruit" class="col-2 col-form-label">Fruit: </label>
+                  <div class="col-6">
+                    <input type="text" data-bind="value: nameToAdd, valueUpdate: 'afterkeydown'" class="form-control"
+                      id="txtFruit" />
+                  </div>
+
+                  <div class="col-4">
+                    <a href="#" data-bind="click: add" class="btn btn-primary">Add</a>
+                  </div>
+
+                </div>
+
+                <div class="form-group">
+                  <label for="employeeList">Shopping Cart: </label>
+                  <select size="10" class="form-control" data-bind="options: employeeList" id="employeeList"></select>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <script>
+      function EmployeeViewModel() {
+        this.nameToAdd = ko.observable('');
+        this.employeeList = ko.observableArray([
+          'Bob Smith',
+          'Maggie Jacobs'
+        ]);
+        this.error = ko.observable('');
+
+        this.add = function() {
+          if ((this.nameToAdd() !== '') && (this.employeeList.indexOf(this.nameToAdd()) < 0)) {
+            this.error('');
+            this.employeeList.push(this.nameToAdd());
+          } else {
+            this.error('Duplicate Name or an Invalid Entry.');
+          }
+
+          this.nameToAdd('');
+        }
+      }
+      ko.applyBindings(new EmployeeViewModel());
+    </script>
 
   </body>
 </html>

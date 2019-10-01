@@ -1,0 +1,106 @@
+<!--
+============================================
+; Title: exercise-9.2.js
+; Author: Cory Gilliam
+; Date: 1 Oct 2019
+; Modified By:
+; Description: Hello MVC
+;===========================================
+-->
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8">
+    <title>Assignment 9.2</title>
+
+    <!-- Stylesheet - Bootstrap -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0-beta.2/css/bootstrap.min.css"
+          integrity="sha384-PsH8R72JQ3SOdhVi3uxftmaW6Vc51MKb0q5P2rRUpPvrszuE4W1povHYgTpBfshb" crossorigin="anonymous">
+
+    <!-- JavaScript references -->
+    <script src="https://code.jquery.com/jquery-3.1.0.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/underscore.js/1.8.3/underscore-min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/backbone.js/1.3.3/backbone-min.js"></script>
+  </head>
+  <body>
+
+    <nav class="navbar navbar-expand-sm bg-dark navbar-dark">
+      <ul class="navbar-nav">
+        <li class="nav-item active">
+          <a class="nav-link" href="#">Home</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">About</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#">Contact Us</a>
+        </li>
+      </ul>
+    </nav>
+
+    <div role="main" class="container">
+      <h1>Employees</h1>
+      <p class="lead">Employee Collections.</p>
+      <div class="row">
+        <div class="col-sm-9">
+
+          <table class="table table-dark table-striped table-hover">
+
+            <thead>
+              <tr>
+                <th>ID</th>
+                <th>Name</th>
+                <th>Salary</th>
+              </tr>
+            </thead>
+
+            <tbody id="table-body">
+            </tbody>
+
+          </table>
+
+        </div>
+      </div>
+    </div>
+
+  <script>
+    // Employee object
+    function Employee(id, name, salary) {
+      this.id    = id;
+      this.name  = name;
+      this.salary = salary;
+    }
+
+    // Change number into dollar amount string
+    function numberToDollars(number) {
+      return '$' + number.toFixed(2).toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+    }
+
+    // Backbone model with defaults
+    var EmployeeModel = Backbone.Model.extend({
+      defaults: {
+        id: '',
+        name: '',
+        salary: 0
+      }
+    });
+
+    // Backbone collection using the model
+    var EmployeeCollection = Backbone.Collection.extend({ model: EmployeeModel });
+    var Employees = new EmployeeCollection();
+
+    // Fill the Backbone collection
+    Employees.add(new Employee('100', 'Kacy Snyder', 119332.00));
+    Employees.add(new Employee('101', 'Kurt Clifford', 56759.00));
+    Employees.add(new Employee('102', 'Clarice Petty', 60563.00));
+    Employees.add(new Employee('103', 'Ivo Bentley', 118432.00));
+
+    // Populate the view
+    Employees.each(function(employee) {
+      $('#table-body').append('<tr>' + '<td>' + employee.get('id') + '</td>' + '<td>' + employee.get('name') + '</td>' +
+        '<td>' + numberToDollars(employee.get('salary')) + '</td>' + '</tr>');
+    });
+  </script>
+
+  </body>
+</html>

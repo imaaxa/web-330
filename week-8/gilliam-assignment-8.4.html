@@ -27,9 +27,207 @@
   </head>
   <body>
 
+    <div role="main" class="container">
+
+      <h2>CRUD Example</h2>
+
+      <!-- Error Block -->
+      <div class="row" data-bind="if: error">
+        <div class="col-sm-12">
+          <div class="alert alert-danger" role="alert">
+            <strong>Warning!</strong> <span data-bind="text: error()"></span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Add Block -->
+      <div class="row">
+        <div class="col-sm-12 mb-2">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+
+              <h3 class="card-title">Employee: Add</h3>
+              <div class="card-text">
+                <div class="form-group row">
+
+                  <label for="txtEmployee" class="col-2 col-form-label">Name: </label>
+                  <div class="col-6">
+                    <input type="text" data-bind="value: nameToAdd, valueUpdate: 'afterkeydown'" class="form-control" id="txtEmployee" />
+                  </div>
+                </div>
+
+                <div class="form-group float-right">
+                  <a href="#" data-bind="click: add" class="btn btn-primary">Add</a>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- List Block -->
+      <div class="row">
+        <div class="col-sm-12 mb-2">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+
+              <h3 class="card-title">Employee: List</h3>
+              <div class="card-text">
+
+                <table class="table table-dark table-striped table-hover">
+                  <thead>
+                    <tr>
+                      <th>Employee Id</th>
+                      <th>Name</th>
+                      <th>Functions</th>
+                    </tr>
+                  </thead>
+
+                  <tbody data-bind="foreach: Employees">
+                    <tr>
+                      <td data-bind="text: Id"></td>
+                      <td data-bind="text: Name"></td>
+                      <td>
+                        <span>
+                          <a href="#" class="btn btn-success" data-bind="click: $root.edit">
+                            <i class="fa fa-pencil fa-lg"></i> EDIT
+                          </a>
+                        </span>
+                        <span>
+                          <a href="#" class="btn btn-danger" data-bind="click: $root.remove">
+                            <i class="fa fa-trash-o fa-lg"></i> DELETE
+                          </a>
+                        </span>
+                      </td>
+                    </tr>
+                  </tbody>
+                </table>
+
+              </div>
+
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Edit Block -->
+      <div class="row" data-bind="if: Employee">
+        <div class="col-sm-12 mb-2">
+          <div class="card card-inverse" style="background-color: #333; border-color: #333; color: white;">
+            <div class="card-block p-3">
+
+              <h3 class="card-title">Employee: Edit</h3>
+              <div class="card-text">
+                <div class="form-group row">
+
+                  <label for="txtName" class="col-2 col-form-label">Name: </label>
+                  <div class="col-6">
+                    <input type="text" id="txtName" data-bind="value: Employee().Name" class="form-control" />
+                  </div>
+                </div>
+
+                <div class="form-group float-right">
+                  <button data-bind="click: $root.cancel" class="btn btn-group btn-danger">Cancel</button>
+                  <button data-bind="click: $root.update" class="btn btn-group btn-success">Save</button>
+                </div>
+
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+    </div>
 
   <script>
+    // Create an employee object
+    function Employee(id, name) {
+      this.Id = id;
+      this.Name = name;
+    }
 
+    // Create initial employee object list
+    var EmployeeList = [
+      new Employee(1, 'Camilla')/*,
+      new Employee(2, 'Sumaiya'),
+      new Employee(3, 'Rhonda'),
+      new Employee(4, 'Marcie'),
+      new Employee(5, 'Hawwa'),
+      new Employee(6, 'Katie-Louise'),
+      new Employee(7, 'Jordi'),
+      new Employee(8, 'Shanon'),
+      new Employee(9, 'Emma'),
+      new Employee(10, 'Erica')*/
+    ];
+
+    // Create the employee view model
+    function EmployeeViewModel() {
+      var self = this;
+
+      // Create the observables
+      self.Id        = ko.observable('');
+      self.Name      = ko.observable('');
+      self.nameToAdd = ko.observable('');
+      self.Employee  = ko.observable();
+      self.Employees = ko.observableArray(EmployeeList);
+      self.error     = ko.observable('');
+
+      // Populate employee object with data
+      var Employee = {
+        Id: self.Id,
+        Name: self.Name
+      };
+
+      // Add new employee to the list, no duplicates
+      self.add = function() {
+        var pass = false;
+        var nameToAdd = self.nameToAdd();
+
+        if (self.nameToAdd() !== '') {
+          for (var index = 0; index < self.Employees().length; index++) {
+            if(self.Employees()[index].Name === nameToAdd) {
+              pass = true;
+            }
+          }
+
+          if (!pass) {
+            Employee.Id = (self.Employees().length + 1);
+            Employee.Name = self.nameToAdd();
+            self.Employees.push(Employee);
+            self.error('');
+          } else {
+            self.error('Duplicate Name or an Invalid Entry.');
+          }
+        }
+
+        self.nameToAdd('');
+      }
+
+      // Edit employee
+      self.edit = function (Employee) {
+        self.Employee(Employee);
+      };
+
+      // Update employee
+      self.update = function () {
+        var l_employee = self.Employee();
+        self.Employees.remove(self.Employee());
+        self.Employees.push(l_employee);
+        self.cancel();
+      };
+
+      // Removes employee from list
+      self.remove = function (Employee) {
+        self.Employees.remove(Employee);
+      };
+
+      // Hides the employee edit block
+      self.cancel = function () {
+        self.Employee(null);
+      };
+    }
+    ko.applyBindings(new EmployeeViewModel());
   </script>
 
   </body>
